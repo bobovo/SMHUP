@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b3jw1jvyibxex"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_3yp00"]
-[ext_resource type="Texture2D" uid="uid://wxrvk40dl4uo" path="res://Assets/spaceShips_001.png" id="1_22v41"]
+[ext_resource type="Texture2D" uid="uid://d060ypfusvfs2" path="res://Assets/spaceShips_001.png" id="1_22v41"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_34u8s"]
 radius = 32.0
@@ -21,3 +21,5 @@ shape = SubResource("CircleShape2D_34u8s")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-59, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -10,7 +10,7 @@ func _ready():
 	assert(player!=null)
 	player.global_position = player_spawn_pos.global_position
 	player.laser_shot.connect(_on_player_laser_shot)
-	
+
 func _process(_delta):
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
