@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bk5jon0mbo6gw" path="res://Assets/playership.png" id="1_krrxd"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_4y1xn")
 
