@@ -6,5 +6,5 @@ func _on_restart_button_pressed():
 func set_score(value):
 	$Panel/Score.text = "Score: " + str(value)
 
-func set_High_score(value):
+func set_high_score(value):
 	$Panel/HighScore.text = "Hi-Score: " + str(value)
