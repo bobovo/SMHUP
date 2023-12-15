@@ -19,6 +19,7 @@ enemy_scenes = Array[PackedScene]([ExtResource("4_hxgxa"), ExtResource("4_b7feo"
 visible = false
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("2_1j8i0")]
