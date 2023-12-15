@@ -1,16 +1,41 @@
-[gd_scene load_steps=8 format=3 uid="uid://be4ffr5nb8qt2"]
+[gd_scene load_steps=13 format=3 uid="uid://be4ffr5nb8qt2"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_084re"]
 [ext_resource type="PackedScene" uid="uid://g0tj4cb8qpcd" path="res://Scenes/player.tscn" id="2_1j8i0"]
 [ext_resource type="PackedScene" uid="uid://bkflqscw45urw" path="res://Scenes/diver_enemy.tscn" id="4_b7feo"]
 [ext_resource type="PackedScene" uid="uid://b3jw1jvyibxex" path="res://Scenes/enemy.tscn" id="4_hxgxa"]
 [ext_resource type="PackedScene" uid="uid://dk2o31cvoq5pu" path="res://Scenes/hud.tscn" id="4_jdijw"]
+[ext_resource type="AudioStream" uid="uid://c2l75snyea1v4" path="res://Assets/laser.ogg" id="4_l5iah"]
 [ext_resource type="PackedScene" uid="uid://c373j523imvhw" path="res://Scenes/game_over_screen.tscn" id="5_66123"]
+[ext_resource type="AudioStream" uid="uid://04hipf7giewf" path="res://Assets/hit.wav" id="5_m7cxm"]
+[ext_resource type="AudioStream" uid="uid://coqfl138f6ttq" path="res://Assets/explode.wav" id="6_8oiiu"]
 [ext_resource type="Texture2D" uid="uid://d1g0gsqwo5607" path="res://Assets/purple.png" id="6_nihob"]
+[ext_resource type="Texture2D" uid="uid://brgbxg4l8d6cm" path="res://Assets/star.png" id="7_20ejm"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qaikk"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(270, 1, 1)
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+gravity = Vector3(0, 0, 0)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_084re")
 enemy_scenes = Array[PackedScene]([ExtResource("4_hxgxa"), ExtResource("4_b7feo")])
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="LaserSound" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_l5iah")
+
+[node name="HitSound" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_m7cxm")
+
+[node name="ExplodeSound" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_8oiiu")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
@@ -30,6 +55,15 @@ texture = ExtResource("6_nihob")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 960, 540)
+
+[node name="StarParticuleEffect" type="GPUParticles2D" parent="."]
+position = Vector2(-70, 270)
+rotation = 1.5708
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_qaikk")
+texture = ExtResource("7_20ejm")
+lifetime = 1.25
+preprocess = 5.0
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
