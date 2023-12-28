@@ -21,14 +21,48 @@ func _process(delta):
 			shoot()
 			await get_tree().create_timer(rate_of_fire).timeout
 			shoot_cd = false
-	elif Input.is_action_pressed("mouse_click"):
-		if !shoot_cd:
-			shoot_cd = true
-			shoot()
-			await get_tree().create_timer(rate_of_fire).timeout
-			shoot_cd = false
 
-func _physics_process(delta):
+func _input(event):
+	if Input.is_action_pressed("shoot"):
+		if event is InputEventMouseMotion:
+			if event.get_relative().x > 0:
+				#print("Moving right")
+				var direction : Vector2 = (get_global_mouse_position() - global_position)
+				if direction.length() > 100:
+					direction = direction.normalized() * speed
+				velocity = direction
+				move_and_slide()
+				global_position = global_position.clamp(Vector2.ZERO, get_viewport_rect().size)
+				
+			if event.get_relative().x < 0:
+				#print("Moving left")
+				var direction : Vector2 = (get_global_mouse_position() - global_position)
+				if direction.length() > 100:
+					direction = direction.normalized() * speed
+				velocity = direction
+				move_and_slide()
+				global_position = global_position.clamp(Vector2.ZERO, get_viewport_rect().size)
+				
+			if event.get_relative().y > 0:
+				#print("Moving down")
+				var direction : Vector2 = (get_global_mouse_position() - global_position)
+				if direction.length() > 100:
+					direction = direction.normalized() * speed
+				velocity = direction
+				move_and_slide()
+				global_position = global_position.clamp(Vector2.ZERO, get_viewport_rect().size)
+				
+			if event.get_relative().y < 0:
+				#print("Moving up")
+				var direction : Vector2 = (get_global_mouse_position() - global_position)
+				if direction.length() > 100:
+					direction = direction.normalized() * speed
+				velocity = direction
+				move_and_slide()
+				global_position = global_position.clamp(Vector2.ZERO, get_viewport_rect().size)	
+
+func _physics_process(_delta):
+	
 	var direction = Vector2(Input.get_axis("move_left",
 	 "move_right"), Input.get_axis("move_up", "move_down"))
 	#print(direction)
