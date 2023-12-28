@@ -21,6 +21,12 @@ func _process(delta):
 			shoot()
 			await get_tree().create_timer(rate_of_fire).timeout
 			shoot_cd = false
+	elif Input.is_action_pressed("mouse_click"):
+		if !shoot_cd:
+			shoot_cd = true
+			shoot()
+			await get_tree().create_timer(rate_of_fire).timeout
+			shoot_cd = false
 
 func _physics_process(delta):
 	var direction = Vector2(Input.get_axis("move_left",
